@@ -1,31 +1,9 @@
-# CMT - Charlie's Math Template
+# Repository For Notes of Discrete Mathematics Part II (Fall 2023)
 
-A personal template I have created for my own use.
+Personal repo for saving the notes of discrete mathematics course part 2. Use LaTex as the typesetting solution.
 
-A lot of the code is from the following sources:
-1. https://github.com/tecosaur/BMC
-2. https://github.com/lambdasolver/LaTeX
+## Acknowledgement
 
+Textbook: Discrete Mathematics and Its Applications, 8th Edition, Kenneth Rosen.
 
-To use:
-1. Copy this directory to the same directory as your LaTeX file.
-	
-	```bash
-	$ cp ./letterfonts.tex ./macros.tex ./preamble.tex ./template.tex [some_dir]
-	```
-	
-2. Edit the file "template.tex" to your liking.
-
-
-!!!! note
-
-    I expect you to be able to install common LaTeX packages like amsmath, amsfonts, and amssymb.
-    Also, the dark mode in the picture below is from zathura's dark mode.
-    
-
-Pictures:
-
-
-
-![Me using my template with zathura and vim in dark mode](./dark_mode.png)
-![Me using my template with zathura and vim in light mode](./light_mode.png)
+LaTex Template: Charlie's Math Template
