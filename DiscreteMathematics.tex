@@ -1,0 +1,443 @@
+\documentclass{report}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+
+\title{\Huge{Discrete Mathematics}}
+\author{\huge{Yuanfu Li}}
+\date{}
+
+\begin{document}
+
+\maketitle
+\newpage% or \cleardoublepage
+% \pdfbookmark[<level>]{<title>}{<dest>}
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+\pagebreak
+
+\setcounter{chapter}{8}
+
+\chapter{}
+\section{Relations and Their Properties}
+
+\subsection{Introduction}
+\dfn{}{Let $A$ and $B$ be sets. A $binary\ relation\ from\ A\ to\ B$ is a subset of $A\times B$.}
+We use the notation $a\boldsymbol{R}b$ to denote that $(a,b)\in \boldsymbol{R}$.
+
+\subsection{Function as Relations}
+The graph of $f$ is the set of ordered pairs $(a,b)$ such that $b=f(a)$. The graph of $f$ is a subset of $A\times B$, it is a relation from $A$ to $B$.
+\nt{Conversely, if $R$ is a relation from $A$ to $B$ such that every element in $A$ is the first element of exactly one ordered pair of $R$, then a function can be defined with $R$ as its graph.}
+
+\subsection{Relations on a Set}
+\dfn{}{A $relation\ on\ a\ set\ A$ is a relation from $A$ to $A$.}
+\ex{}{Let $A$ be the set $\{1,2,3,4\}$. Which ordered pairs are in the relation $R=\{(a,b)|a\ divides\ b\}.$}
+\sol{Because $(a,b)$ is in $R$ if and only if $a$ and $b$ are positive integers not exceeding 4 such that $a$ divides $b$, we see that\\$R=\{(1,1),(1,2),(1,3),(1,4),(2,2),(2,4),(3,3),(4,4)\}$}
+\subsection{Properties of Relations}
+
+\dfn{}{A relation $R$ on a set $A$ is called \textit{reflexive} if $(a,a)\in R$ for every element }
+\nt{We see that a relation on $A$ is reflexive if every element of $A$ is related to itself}
+
+\dfn{}{A relation $R$ on a set $A$ is called \textit{symmetric} if $(b,a)\in R$ 
+whenever $(a,b)\in R$, for all $a,b\in A$.\\A relation $R$ on a set $A$ such that for all 
+$a,b\in A$, if $(a,b)\in R$ and $(b,a)\in R$, then $a=b$ is called \textit{antisymmetric}.}
+In other words, a relation is symmetric if and only if $a$ is related to $b$ always implies that $b$ is related to $a$.
+A relation is antisymmetric if and only if there are no pairs of distinct elements $a$ and $b$ with
+$a$ related to $b$ and $b$ related to $a$. That is, the only way to have $a$ related to $b$ and $b$ related to $a$ is
+for $a$ and $b$ to be the same element.
+
+\dfn{}{A relation $R$ on a set $A$ is called \textit{transitive} is whenever $(a,b)\in R$ and
+$(b,c)\in R$, then $(a,c)\in R$, for all $a,b,c\in A$.}
+
+\subsection{Combining Relations}
+\dfn{}{Let $R$ be a relation from a set $A$ to a set $B$ and $S$ a relation from $B$ to a set $C$.
+The \textit{composite} of $R$ and $S$ is the relation consisting of ordered pairs $(a,c)$,
+where $a\in A,c\in C$, and for which there exists an element $b\in B$ such that $(a,b)\in R$ and
+$(b,c)\in S$. We denote the composite of $R$ and $S$ by $S\circ R$}
+\nt{Computing the composite of two relations requires that we find elements that are the 
+\textit{second} element of ordered pairs in the \textit{first} relation and the \textit{first}
+element of ordered pairs in the \textit{second} relation.}
+\ex{}{What is the composite of the relations $R$ and $S$, where $R$ is the relation from $\{1,2,3\}$ to
+$\{1,2,3,4\}$ with $R=\{(1,1),(1,4),(2,3),(3,1),(3,4)\}$ and $S$ is the relation from 
+$\{1,2,3,4\}$ to $\{0,1,2\}$ with $S=\{(1,0),(2,0),(3,1),(3,2),(4,1)\}$?}
+\sol{$S\circ R=\{(1,0),(1,1),(2,1),(2,2),(3,0),(3,1)\}$}
+
+\dfn{}{Let $R$ be a relation on the set $A$. The powers $R^n,n=1,2,3,\cdots$, are defined recursively by\\
+$R^1=R$ and $R^{n+1}=R^n\circ R$.}
+
+\thm{}{The relation $R$ on a set $A$ is transitive if and only if $R^n \subseteq R$ for $n=1,2,3,\cdots$.}
+\begin{myproof}
+    \par
+    We first prove the "if" part of the theorem. We suppose that $R^n \subseteq R$ for $n=1,2,3,\cdots$.\\
+    In particular, $R^2\subseteq R$. To see that this implies $R$ is transitive, not that if $(a,b)\in R$
+    and $(b,c)\in R$, then by the definition of composition, $(a,c)\in R^2$. Because $R^2\subseteq R$, this
+    means that $(a,c)\in R$. Hence, $R$ is transitive.
+    \par
+    Assume that $R^n\in R$, where $n$ is a positive integer. This is the inductive hypothesis. To complete the
+    inductive step we must show that this implies that $R^{n+1}$ is also a subset of $R$. To show this, assume
+    that $(a,b)\in R^{n+1}$. Then, because $R^{n+1}=R^n\circ R$, there is an element $x$ with $x\in A$
+    such that $(a,x)\in R$ and $(x,b)\in R^n$. The inductive hypothesis, namely, that $R^n\subseteq R$,
+    implies that $(x,b)\in R$. Furthermore, because $R$ is transitive, and $(a,x)\in R$ and $(x,b)\in R$, 
+    it follows that $(a,b)\in R$. This shows that $R^{n+1}\subseteq R$, completing the proof.
+\end{myproof}
+So fucking elusive and tedious.
+
+\section{$n$-ary Relations and Their Applications}
+\subsection{Introduction}
+Relations among elements from more than two sets are called $n$-ary relations.
+
+\subsection{$n$-ary Relations}
+\dfn{}{Let $A_1,A_2,\cdots,A_n$ be sets. An \textit{n-ary relation} on these sets is a subset of
+$A_1\times A_2\times\cdots \times A_n$. The sets $A_1,A_2,\cdots,A_n$ are called the \textit{domains} 
+of the relation, and $n$ is called its \textit{degree}.}
+\ex{}{Let $R$ be the relation on $\textbf{N}\times\textbf{N}\times\textbf{N}$ consisting of triples $(a,b,c)$, where $a$, $b$ 
+and $c$ are integers with $a<b<c$}
+
+\subsection{Databases and Relations}
+Understand the concept of \textbf{relational data model}, that's it.
+
+\subsection{Operations on $n$-ary Relations}
+\dfn{}{Let $R$ be an $n$-ary relation and $C$ a condition that elements in $R$ may satisfy. Then the 
+\textit{selection operator} $s_C$ maps the $n$-ary relation $R$ to the $n$-ary relation of all $n$-tuples
+from $R$ that satisfy the condition $C$.}
+
+\dfn{}{The \textit{projection} $P_{i_1,i_2,\cdots,i_m}$, where $i_1<i_2<\cdots<i_m$, maps the 
+$n$-tuple $(a_1,a_2,\cdots,a_n)$ to the $m$-tuple $(a_{i_1},a_{i_2},\cdots,a_{i_m})$, where $m\leq n$.}
+In other words, the projection $P_{i_1,i_2,\cdots,i_m}$ deletes $n-m$ of the components of an $n$-tuple, 
+leaving the $i_1$th, $i_2$th,..., and $i_m$th components.
+
+\dfn{}{Let $R$ be a relation of degree $m$ and $S$ a relation of degree $n$. The \textit{join} 
+$J_p(R,S)$, where $p\leq m$ and $p\leq n$, is a relation of degree $m+n-p$ that consists of all 
+$(m+n-p)$-tuples $(a_1,a_2,\cdots,a_{m-p},c_1,c_2,\cdots,c_p,b_1,b_2,\cdots,b_{n-p})$, where the
+$m$-tuple $(a_1,a_2,\cdots,a_{m-p},c_1,c_2,\cdots,c_p)$ belongs to $R$ and the $n$-tuple
+$(c_1,c_2,\cdots,c_p,b_1,b_2,\cdots,b_{n-p})$ belongs to $S$.}
+
+\dfn{}{The \textit{count} of an itemset $I$, denoted by $\sigma(I)$, in a set of 
+transactions $T=\{t_1,t_2,\cdots,t_k\}$, where $k$ is a positive integer, is the
+number of transactions that contain this itemset. That is, \\
+$\sigma(I)=|\{t_i\in T|I\subseteq t_i\}|$.\\The \textit{support} of an itemset $T$ is the
+probability that $I$ is included in a randomly selected transaction from $T$. That is,\\
+$\displaystyle support(I)=\frac{\sigma(I)}{|T|}$}
+The \textbf{support threshold} $s$ is specified for a particular application. 
+\textbf{Frequent itemset mining} is the process of finding itemset $I$ with support
+greater than or equal to $s$. Such itemsets are said to be \textbf{frequent}.
+
+\dfn{}{If $I$ and $J$ are subsets of a set $T$ of transactions, then\\
+$\displaystyle support(I\rightarrow J)=\frac{\sigma(I\cup J)}{|T|}$\\
+and\\
+$\displaystyle support(I\rightarrow J)=\frac{\sigma(I\cup J)}{\sigma(I)}$.}
+
+\setcounter{section}{3}
+\section{Closure of Relations}
+
+\subsection{Introduction}
+We can find all pairs of data centers that have a link by constructing a transitive relation
+$S$ containing $R$ such that $S$ is a subset of every transitive relation containing $R$. 
+Here, $S$ is the smallest transitive relation that contains $R$. This relation is called the
+\textbf{transitive closure} of $R$.
+
+\subsection{Different Types of Closures}
+
+\dfn{}{If $R$ is a relation on a set $A$, then the \textbf{closure} of $R$ is with respect to $P$, 
+if it exists, is the relation $S$ on $A$ with property \textbf{P} that contains $R$ and is a subset 
+of every subset of $A\times A$ containing $R$ with property \textbf{P}.}
+
+\ex{}{The relation $R=\{(1,1),(1,2),(2,1),(3,2)\}$ on the set $A=\{1,2,3\}$ is not reflexive.
+By adding $(2,2)$ and $(3,3)$ to $R$ which are the only pairs of the form $(a,a)$ that are not in 
+$R$, we can get a new relation which contains $R$.}
+\par
+The above example creates the \textbf{reflexive closure} of $R$.
+\par
+We see that the reflexive closure of $R$ equals $R\cup \Delta$, where $\Delta=\{(a,a)|a\in A\}$ 
+is the \textbf{diagonal relation} on $A$.
+\ex{}{The relation $\{(1,1),(1,2),(2,2),(2,3),(3,1),(3,2)\}$ on $\{1,2,3\}$ is not symmetric. 
+By adding $(2,1)$ and $(1,3)$ to $R$ which are the only pairs of the form $(b,a)$ with $(a,b)\in R$ 
+that are not in $R$, we can get a new symmetric relation contains $R$.} 
+The new relation is called the \textbf{symmetric closure} of $R$.
+
+\subsection{Path in Directed Graphs}
+A path in a directed graph is obtained by traversing along edges (in the same direction as indicated by the arrow on the edge).
+\dfn{}{A \textit{path} from $a$ to $b$ in the directed graph $G$ is a sequence of edges
+$(x_0,x_1),(x_1,x_2),(x_2,x_3),\cdots,(x_{n-1},x_n)$ in G, where $n$ is a non-negative integer, and
+$x_0=a$ and $x_n=b$, that is, a sequence of edges where the terminal vertex of an edge is the same as the 
+initial vertex in the next edge in the path. This path is denoted by $x_0,x_1,x_2,\cdots,x_{n-1},x_n$
+and has \textit{length} $n$. We view the empty set of edges as a path of length zero from $a$ to $a$. 
+A path of length $n\geq 1$ that begins and ends at the same vertex is called a \textit{circuit} or \textit{cycle}.}
+
+The term \textit{path} also applies to relations, Carrying over the definition from directed graphs to 
+relations, there is a \textbf{path} from $a$ to $b$ in $R$ if there is a sequence of elements 
+$a, x_1, x_2,\cdots, x_{n-1}, b$ with $(a,x_1)\in R, (x_1,x_2)\in R,\cdots,$ and $(x_{n-1}, b)\in R$. 
+Theorem 1 can be obtained from the definition of a path in a relation.
+
+\thm{}{Let $R$ be a relation on a set $A$. There is a path of length $n$, where $n$ is a positive integer, 
+from $a$ to $b$ if and only if $(a,b)\in R^n$.}
+\begin{myproof}
+    We will use mathematical induction. By definition, there is a path from $a$ to $b$ of length on if 
+    and only if $(a,b)\in R$, so the theorem is true when $n=1$.
+    \par
+    Assume that the theorem is true for the positive integer $n$. This is the inductive hypothesis. There
+    is a path of length $n+1$ from $a$ to $b$ if and only if there is an element $c\in A$ such that 
+    there is a path of length one from $a$ to $c$, so $(a,c)\in R$, and a path of length $n$ from $c$ to $b$, 
+    that is, $(c,b)\in R^n$. Consequently, by the inductive hypothesis, there is a path of length $n+1$ from
+    $a$ to $b$ if and only if there is an element $c$ with $(a,c)\in R$ and $(c,b)\in R^n$. But there is such an
+    element if and only if $(a,b)\in R^{n+1}$. Therefore, there is a path of length $n+1$ from $a$ to $b$ if
+    and only if $(a,b)\in R^{n+1}$. This completes the proof.
+\end{myproof}
+
+\subsection{Transitive Closures}
+\dfn{}{Let $R$ be a relation on a set $A$. The \textit{connectivity relation} $R^*$ consists of 
+the pairs $(a,b)$ such that there is a path of length at least one from $a$ to $b$ in $R$.}
+
+Because $R^n$ consists of the pairs $(a,b)$ such that there is a path of length $n$ from $a$ to $b$, it
+follows that $R^*$ is the union of all the sets $R^n$. In other words,
+\begin{align*}
+    R^*=\bigcup^\infty_{n=1} R^n
+\end{align*}
+The connectivity relation is useful in many models.
+
+\ex{}{Let $R$ be the relation on the set of all subway stops in New York City that contains
+$(a,b)$ if it is possible to travel from stop $a$ to stop $b$ without changing trains. What
+is $R^n$ when $n$ is a positive integer? What is $R^*$?}
+\sol
+The relation $R^n$ contains $(a,b)$ if it is possible to travel from stop $a$ to stop $b$ by 
+making at most $n-1$ changes of trains. The relation $R^*$ consists of the ordered pairs $(a,b)$ 
+where it is possible to travel from stop $a$ to stop $b$ making as many changes of trains as necessary.
+
+\thm{}{The transitive closure of a relation $R$ equals the connectivity relation $R^*$.}
+
+\mlemma{}{Let $A$ be a set with $n$ elements, and let $R$ be a relation on $A$. If there is a 
+path of length at least one in $R$ from $a$ to $b$, then there is such a path with length not 
+exceeding $n$. Moreover, when $a\neq b$, if there is a path of length at least one in $R$ from
+$a$ to $b$, then there is such a path with length not exceeding $n-1$.}
+
+From Lemma 1, we see that the transitive closure of $R$ is the union of $R,R^2,R^3,\cdots,$ and
+$R^n$. This follows because there is a path in $R^*$ between two vertices if and only if there is
+a path between these vertices in $R^i$, for some positive integer $i$ with $i\leq n$. Because
+\begin{align*}
+    R^*=R\cup R^2\cup R^3\cup \cdots \cup R^n
+\end{align*}
+and the zero-one matrix representing a union of relations is the join of the zero-one matrices of these relations,
+the zero-one matrix for the transitive closure is the join of the zero-one matrices of the first
+$n$ powers of the zero-one matrix of $R$.
+
+\thm{}{Let $\boldsymbol{M}_R$ be the zero-one matrix of the relation $R$ on a set with $n$ elements.
+Then the zero-one matrix of the transitive closure $R^*$ is
+\begin{align*}
+    \boldsymbol{M}_{R^*}=\boldsymbol{M}_R \vee \boldsymbol{M}_R^{[2]} \vee \boldsymbol{M}_R^{[3]}
+    \vee \cdots \vee \boldsymbol{M}_R^{[n]}
+\end{align*}
+}
+\ex{}{Find the zero-one matrix of the transitive closure of the relation $R$ where
+\begin{align*}
+    \boldsymbol{M}_R=
+    \begin{bmatrix}
+        1 & 0 & 1\\
+        0 & 1 & 0\\
+        1 & 1 & 0
+    \end{bmatrix}
+\end{align*}    
+}
+\sol
+By Theorem 3, it follows that the zero-one matrix of $R^*$ is
+\begin{align*}
+    \boldsymbol{M}_{R^*}=\boldsymbol{M}_R \vee \boldsymbol{M}_R^{[2]} \vee \boldsymbol{M}_R^{[3]}
+\end{align*}
+Because
+\begin{align*}
+    \boldsymbol{M}_R^{[2]}=
+    \begin{bmatrix}
+        1 & 1 & 1\\
+        0 & 1 & 0\\
+        1 & 1 & 1
+    \end{bmatrix}&&
+    \boldsymbol{M}_R^{[3]}=
+    \begin{bmatrix}
+        1 & 1 & 1\\
+        0 & 1 & 0\\
+        1 & 1 & 1
+    \end{bmatrix}
+\end{align*}
+it follows that
+\begin{align*}
+    \boldsymbol{M}_{R^*}=
+    \begin{bmatrix}
+        1 & 0 & 1\\
+        0 & 1 & 0\\
+        1 & 1 & 0
+    \end{bmatrix}\vee
+    \begin{bmatrix}
+        1 & 1 & 1\\
+        0 & 1 & 0\\
+        1 & 1 & 1
+    \end{bmatrix}\vee
+    \begin{bmatrix}
+        1 & 1 & 1\\
+        0 & 1 & 0\\
+        1 & 1 & 1
+    \end{bmatrix}=
+    \begin{bmatrix}
+        1 & 1 & 1\\
+        0 & 1 & 0\\
+        1 & 1 & 1
+    \end{bmatrix}
+\end{align*}
+\subsection*{Algorithms 1}
+\begin{lstlisting}[language=C++, numbers=left,
+                numberstyle=\tiny,keywordstyle=\color{blue!70},
+                commentstyle=\color{red!50!green!50!blue!50},frame=shadowbox,
+                rulesepcolor=\color{red!20!green!20!blue!20},basicstyle=\ttfamily]
+    int** transistive_closure(M = zero-one n*n matrix)
+    {
+        int** A = M;
+        int** B = A;
+        for(int i = 2; i <= n; i++)
+        {
+            A = A xnor M;
+            B = B or A;
+        }
+        return B;
+    }
+    
+\end{lstlisting}
+
+\subsection{Warshall's Algorithm}
+\dfn{}{
+\par    
+Suppose that $R$ is a relation on a set with $n$ elements. Let $v_1,v_2,\cdots,v_n$
+be an arbitrary listing of these $n$ elements. The concept of the \textbf{interior vertices} of 
+a path is used in Warshall's algorithm. If $a,x_1,x_2,\cdots,x_{m-1},b$ is a path, its interior
+vertices are $x_1,x_2,\cdots,x_{m-1}$, that is, all the vertices of the path that occur somewhere
+other than as the first and last vertices in the path. Note that the first vertex in the path is not
+an interior vertex unless it is visited again by the path, except as the last vertex. Similarly, the last
+vertex in the path is not an interior vertex unless it was visited previously by the path, except as the
+first vertex.
+\par
+Warshall's algorithm is based on the construction of a sequence of zero-one matrices. These matrices
+are $\boldsymbol{W}_0,\boldsymbol{W}_1,\cdots,\boldsymbol{W}_n$, where $\boldsymbol{W}_0=\boldsymbol{W}_R$
+is the zero-one matrix of this relation, and $\boldsymbol{W}_k=[w_{ij}^{(k)}]$, where $\boldsymbol{W}_k=1$
+if there is a path from $v_i$ to $v_j$ such that all the interior vertices of this path are in the
+set $\{v_1,v_2,\cdots,v_k\}$(the first $k$ vertices in the list) and is 0 otherwise.
+(The first and last vertices in the path may be outside the set of the first $k$ vertices in the list).
+Note that $\boldsymbol{W}_n=\boldsymbol{W}_{R^*}$, because the $(i,j)$th entry of $\boldsymbol{W}_{R^*}$
+is 1 if and only if there is a path from $v_i$ to $v_j$, with all interior vertices in the set
+$\{v_1,v_2,\cdots,v_k\}$(but these are the only vertices in the directed graph).
+}
+\ex{}{Let $R$ be the relation $\{(a,d),(b,a),(b,c),(c,a),(c,d),(d,c)\}$. Let $a,b,c,d$ be a listing of
+the elements of the set. Find the matrices $\boldsymbol{W}_0,\boldsymbol{W}_1,\boldsymbol{W}_2,\boldsymbol{W}_3,\boldsymbol{W}_4$
+The matrix $\boldsymbol{W}_4$ is the transitive closure $R$.}
+\sol
+Let $v_1=a,v_2=b,v_3=c,v_4=d$.$\boldsymbol{W}_0$ is the matrix of the relation. Hence,
+\begin{align*}
+    \boldsymbol{W}_0=
+    \begin{bmatrix}
+        0 & 0 & 0 & 1\\
+        1 & 0 & 1 & 0\\
+        1 & 0 & 0 & 1\\
+        0 & 0 & 1 & 0
+    \end{bmatrix}\ 
+    \boldsymbol{W}_1=
+    \begin{bmatrix}
+        0 & 0 & 0 & 1\\
+        1 & 0 & 1 & 1\\
+        1 & 0 & 0 & 1\\
+        0 & 0 & 1 & 0
+    \end{bmatrix}\ 
+    \boldsymbol{W}_2=\boldsymbol{W}_3=
+    \begin{bmatrix}
+        0 & 0 & 0 & 1\\
+        1 & 0 & 1 & 1\\
+        1 & 0 & 0 & 1\\
+        1 & 0 & 1 & 1
+    \end{bmatrix}\ 
+    \boldsymbol{W}_4=
+    \begin{bmatrix}
+        1 & 0 & 1 & 1\\
+        1 & 0 & 1 & 1\\
+        1 & 0 & 1 & 1\\
+        1 & 0 & 1 & 1
+    \end{bmatrix}
+\end{align*}
+
+\mlemma{}{Let $\boldsymbol{W}_k=[w_{ij}^{[k-1]}]$ be the zero-one matrix that has a 1 in its $(i,j)$th
+position if and only if there is a path from $v_i$ to $v_j$ with interior vertices from the set $\{v_1,v_2,\cdots,v_k\}$. Then
+\begin{align*}
+    w_{ij}^{[k]}=w_{ij}^{[k-1]}\vee (w_{ik}^{[k-1]}\wedge w_{kj}^{[k-1]})\
+\end{align*}
+}
+
+\subsection*{Algorithm 2}
+\begin{lstlisting}[language=C++, numbers=left,
+    numberstyle=\tiny,keywordstyle=\color{blue!70},
+    commentstyle=\color{red!50!green!50!blue!50},frame=shadowbox,
+    rulesepcolor=\color{red!20!green!20!blue!20},basicstyle=\ttfamily]
+int** Warshall(M = n*n zero-one matrix)
+{
+    W = M;
+    /* Suppose the first index of an array is 1. */
+    for (int k = 1; k <= n; k++)
+    {
+        for (int i = 1; i <= n; i++)
+        {
+            for (int j = 1; j <= n; j++)
+            W[i][j] = W[i][j] | (W[i][k] & W[k][j]) 
+        }
+    }
+    return W;
+}
+
+\end{lstlisting}
+
+\subsection{Equivalence Relations}
+\dfn{}{A relation on a set $A$ is called an \textit{equivalence relation} if it is reflexive, 
+symmetric, and transitive.}
+\dfn{}{Two elements $a$ and $b$ that are related by an equivalence relation are called \textit{equivalent}.
+The notation $a\sim b$ is often used to denote that $a$ and $b$ are equivalent elements with respect to a 
+particular equivalence relation.}
+
+\dfn{}{Let $R$ be an equivalence relation on a set $A$. The set of all elements that are related to 
+an element $a$ of $A$ is called the \textit{equivalence class} of $a$. The equivalence class of $a$ with
+respect to $R$ is  denoted by $[a]_R$. When only one relation is under consideration, we can delete the subscript
+$R$ and write $[a]$ for this equivalence class.}
+
+\subsection{Equivalence Classes and Partitions}
+$R$ is an equivalence relation. We can see that $R$ splits all students in $A$ in to a collection of 
+disjoint subsets, where each subset contains students with a specified major. Furthermore, these subsets
+are equivalence classes of $R$. This example illustrates how the equivalence classes of an equivalence 
+relation partition a set into disjoint, non-empty subsets.
+\thm{}{Let $R$ be an equivalence relation on a set $A$. These statements for elements $a$ and $b$ of $A$
+are equivalent: 
+\begin{align*}
+    aRb&&[a]=[b]&&[a]\cap [b]\neq \emptyset
+\end{align*}
+}
+
+Now we are going to show how an equivalence relation \textit{partitions} a set. Let $R$ be an
+equivalence relation on a set $A$. The union of the equivalence classes of $R$ is all of $A$, 
+because an element $a$ of $A$ is in its own equivalence class, namely, $[a]_R$. In other words,
+\begin{align*}
+    \bigcup_{a\in A}[a]_R=A.
+\end{align*}
+In addition, from Theorem 9.4.4, it follows that these equivalence classes are either equal or disjoint, so
+\begin{align*}
+    [a]_R\cap [b]_R=\emptyset
+\end{align*}
+when $ [a]_R\neq [b]_R$
+\par
+These two observations show that the equivalence classes form a partition of $A$, because they
+split $A$ into disjoint subsets. More precisely, a \textbf{partition} of a set $S$ is a collection of
+disjoint non-empty subsets of $S$ that have $S$ as their union. In other words, the collection of
+subsets $A_i,i\in I$ forms a partition of $S$ is and only if
+\begin{align*}
+    &A_i\neq \emptyset\ for\ i\in I,\\
+    &A_i\cap A_j = \emptyset\ when\ i\neq j,
+\end{align*}
+and
+\begin{align*}
+    \bigcup_{i\in I}A_i=S
+\end{align*}
+
+\thm{}{Let $R$ be an equivalence relation on a set $S$. Then the equivalence classes of $R$ form a 
+partition of $S$. Conversely, given a partition$\{A_i | i\in I\}$ of the set $S$, there is an
+equivalence relation $R$ that has the sets $A_i,i\in I$, as its equivalence classes.}
+\end{document}
